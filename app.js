@@ -5,7 +5,10 @@ const routes = require('./routes/routes');
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/muber');
+
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect('mongodb://localhost/muber');
+}
 
 //middleware to parse incoming request bodies to json.
 app.use(bodyParser.json());
